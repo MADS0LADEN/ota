@@ -38,7 +38,7 @@ try:
     import main
     import ota
 
-    machine.deepsleep(10000)
+    # machine.deepsleep(10000)
 
 except KeyboardInterrupt:
     print("Afbryder start sekvens")
