@@ -4,19 +4,22 @@ import config
 import esp32
 import machine
 import micropython_ota as ota
-import neopixel
 
+# Wake-on-pin konfiguration
 esp32.wake_on_ext0(
     pin=machine.Pin(2, machine.Pin.IN, machine.Pin.PULL_DOWN),
     level=esp32.WAKEUP_ANY_HIGH,
 )
 
-# Initialiser status LED
+# Initialiser status LED og logger
 status_led = config.StatusLED()
+logger = config.logger("BOOT", "DEBUG")
 
 
 def show_wake_reason():
+    """Vis wake reason med LED farve"""
     wake_reason = machine.wake_reason()
+    logger.debug(f"Wake reason: {wake_reason}")
 
     if wake_reason == machine.HARD_RESET:
         status_led.set_rgb(255, 0, 0)  # Rød for hard reset
@@ -27,28 +30,29 @@ def show_wake_reason():
 
 
 try:
+    logger.debug("Boot sequence started")
+
     # Vis boot årsag
     show_wake_reason()
-
-    # Vent lidt så vi kan se wake reason
-    time.sleep(1000)
+    time.sleep(1)
 
     # Indiker start med blåt lys
     status_led.set_color("blue")
-
-    time.sleep(5000)  # Sikkerhed så vi kan programmere den
+    logger.debug("Set LED to blue")
+    time.sleep(5)
     status_led.off()
 
+    logger.debug("Importing main and ota")
     import main
     import ota
 
     # Indiker succes med grønt lys
     status_led.set_color("green")
+    logger.debug("Boot sequence completed successfully")
 
 except Exception as e:
-    # Indiker fejl med rødt lys
+    logger.error(f"Boot error: {str(e)}")
     status_led.set_color("red")
     raise e
 finally:
-    # Sluk LED
     status_led.off()
