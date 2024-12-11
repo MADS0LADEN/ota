@@ -1,5 +1,4 @@
 import config
-import wifi
 from lib.micropython_ota import ota_update
 
 config.DEBUG = 1
