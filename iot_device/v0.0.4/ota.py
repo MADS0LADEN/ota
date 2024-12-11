@@ -9,7 +9,7 @@ with wifi.WiFiManager() as wifi_manager:
 
 ota_host = "https://raw.githubusercontent.com/mads0laden/ota/main"
 project_name = "iot_device"
-filenames = ["boot.py", "ota.py"]
+filenames = ["boot.py", "ota.py", "test.py"]
 
 ota_update(
     ota_host,
