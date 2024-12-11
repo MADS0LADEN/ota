@@ -1,19 +1,10 @@
-import ssl
-
 import config
 import wifi
 from lib.micropython_ota import ota_update
 
 config.DEBUG = 1
 
-with wifi.WiFiManager() as wifi_manager:
-    wifi_manager.connect()
-
-# Tilføj SSL context
-ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
-ssl_context.verify_mode = ssl.CERT_NONE  # Deaktiver certifikat verifikation for test
-
-ota_host = "https://raw.githubusercontent.com/mads0laden/ota/refs/heads/main"
+ota_host = "https://raw.githubusercontent.com/mads0laden/ota/main"
 project_name = "iot_device"
 filenames = ["boot.py", "ota.py"]
 
@@ -25,5 +16,4 @@ ota_update(
     hard_reset_device=True,
     soft_reset_device=False,
     timeout=10,
-    ssl_context=ssl_context,
 )
