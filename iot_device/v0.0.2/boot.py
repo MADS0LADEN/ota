@@ -1,7 +1,9 @@
 from time import sleep
 
+import config
 import esp32
 import machine
+import micropython_ota as ota
 import neopixel
 
 esp32.wake_on_ext0(
@@ -9,38 +11,44 @@ esp32.wake_on_ext0(
     level=esp32.WAKEUP_ANY_HIGH,
 )
 
-PIN_NEOPIXEL = 18
-machine.Pin(17, machine.Pin.OUT).on()
-np = neopixel.NeoPixel(machine.Pin(PIN_NEOPIXEL), 1)
-
-
-def color(r, g, b):
-    np[0] = (g, b, r)
-    np.write()
+# Initialiser status LED
+status_led = config.StatusLED()
 
 
 def show_wake_reason():
     wake_reason = machine.wake_reason()
 
     if wake_reason == machine.HARD_RESET:
-        color(255, 0, 0)  # Red
+        status_led.set_rgb(255, 0, 0)  # Rød for hard reset
     elif wake_reason == machine.DEEPSLEEP_RESET:
-        color(0, 0, 255)  # Blue
+        status_led.set_rgb(0, 0, 255)  # Blå for deep sleep wake
     else:
-        color(0, 255, 0)  # Green
+        status_led.set_rgb(0, 255, 0)  # Grøn for andre wake reasons
 
-
-show_wake_reason()
 
 try:
-    sleep(5)  # Sikkerhed så vi kan programmere den
-    color(0, 0, 0)
+    # Vis boot årsag
+    show_wake_reason()
+
+    # Vent lidt så vi kan se wake reason
+    machine.sleep(1000)
+
+    # Indiker start med blåt lys
+    status_led.set_color("blue")
+
+    machine.sleep(5000)  # Sikkerhed så vi kan programmere den
+    status_led.off()
+
     import main
     import ota
 
-    machine.deepsleep(10000)
+    # Indiker succes med grønt lys
+    status_led.set_color("green")
 
-except KeyboardInterrupt:
-    print("Afbryder start sekvens")
+except Exception as e:
+    # Indiker fejl med rødt lys
+    status_led.set_color("red")
+    raise e
 finally:
-    color(0, 0, 0)
+    # Sluk LED
+    status_led.off()
