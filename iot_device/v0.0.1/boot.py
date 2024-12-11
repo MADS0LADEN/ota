@@ -13,7 +13,7 @@ esp32.wake_on_ext0(
 
 # Initialiser status LED og logger
 status_led = config.StatusLED()
-logger = config.logger("BOOT", "DEBUG")
+logger = config.logger("BOOT")
 
 
 def show_wake_reason():

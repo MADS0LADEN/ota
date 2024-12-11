@@ -13,7 +13,7 @@ esp32.wake_on_ext0(
 
 # Initialiser status LED og logger
 status_led = config.StatusLED()
-logger = config.logger("BOOT", "DEBUG")
+logger = config.logger("BOOT")
 
 
 def show_wake_reason():
@@ -26,7 +26,7 @@ def show_wake_reason():
     elif wake_reason == machine.DEEPSLEEP_RESET:
         status_led.set_rgb(255, 0, 255)  # Blå for deep sleep wake
     else:
-        status_led.set_rgb(0, 255, 0)  # Grøn for andre wake reasons
+        status_led.set_color("white")
 
 
 try:
