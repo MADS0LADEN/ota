@@ -56,4 +56,4 @@ except Exception as e:
     raise e
 finally:
     status_led.off()
-    machine.deepsleep(2000)
+    machine.deepsleep(20000)

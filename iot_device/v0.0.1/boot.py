@@ -56,3 +56,4 @@ except Exception as e:
     raise e
 finally:
     status_led.off()
+    # machine.deepsleep(20000)
