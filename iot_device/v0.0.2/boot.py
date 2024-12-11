@@ -24,7 +24,7 @@ def show_wake_reason():
     if wake_reason == machine.HARD_RESET:
         status_led.set_rgb(255, 0, 0)  # Rød for hard reset
     elif wake_reason == machine.DEEPSLEEP_RESET:
-        status_led.set_rgb(0, 0, 255)  # Blå for deep sleep wake
+        status_led.set_rgb(255, 0, 255)  # Blå for deep sleep wake
     else:
         status_led.set_rgb(0, 255, 0)  # Grøn for andre wake reasons
 

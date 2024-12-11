@@ -12,7 +12,7 @@ ota_update(
     project_name,
     filenames,
     use_version_prefix=False,
-    hard_reset_device=False,
+    hard_reset_device=True,
     soft_reset_device=False,
     timeout=10,
 )
