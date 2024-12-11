@@ -7,7 +7,7 @@ config.DEBUG = 1
 with wifi.WiFiManager() as wifi_manager:
     wifi_manager.connect()
 
-ota_host = "https://raw.githubusercontent.com/mads0laden/ota/main"
+ota_host = "http://raw.githubusercontent.com/mads0laden/ota/main"
 project_name = "iot_device"
 filenames = ["boot.py", "ota.py"]
 
