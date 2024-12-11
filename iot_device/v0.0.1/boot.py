@@ -30,6 +30,7 @@ def show_wake_reason():
 
 
 try:
+    config.DEBUG = 1
     logger.debug("Boot sequence started")
 
     # Vis boot årsag
