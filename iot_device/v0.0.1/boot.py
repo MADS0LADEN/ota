@@ -15,7 +15,7 @@ np = neopixel.NeoPixel(machine.Pin(PIN_NEOPIXEL), 1)
 
 
 def color(r, g, b):
-    np[0] = (g, b, r)
+    np[0] = (r, g, b)
     np.write()
 
 
