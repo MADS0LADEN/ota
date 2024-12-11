@@ -6,7 +6,7 @@ config.DEBUG = 1
 
 ota_host = "https://raw.githubusercontent.com/mads0laden/ota/main"
 project_name = "iot_device"
-filenames = ["boot.py", "ota.py", "test.py"]
+filenames = ["boot.py", "ota.py"]
 
 ota_update(
     ota_host,
