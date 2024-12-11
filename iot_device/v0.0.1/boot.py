@@ -1,4 +1,4 @@
-from time import sleep
+import time
 
 import config
 import esp32
@@ -31,12 +31,12 @@ try:
     show_wake_reason()
 
     # Vent lidt så vi kan se wake reason
-    machine.sleep(1000)
+    time.sleep(1000)
 
     # Indiker start med blåt lys
     status_led.set_color("blue")
 
-    machine.sleep(5000)  # Sikkerhed så vi kan programmere den
+    time.sleep(5000)  # Sikkerhed så vi kan programmere den
     status_led.off()
 
     import main
