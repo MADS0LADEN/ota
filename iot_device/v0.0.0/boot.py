@@ -33,29 +33,22 @@ try:
     config.DEBUG = 1
     logger.debug("Boot sequence started")
 
-    # Vis boot årsag
     show_wake_reason()
     time.sleep(1)
-
-    # Indiker start med blåt lys
-    status_led.set_color("blue")
-    logger.debug("Set LED to blue")
-    time.sleep(5)
     status_led.off()
 
     logger.debug("Importing main and ota")
     import main
     import ota
 
-    # Indiker succes med grønt lys
     status_led.set_color("green")
-    logger.debug("Boot sequence completed successfully")
+    logger.debug("Boot sequence completed successfully, now deepsleep")
+    machine.deepsleep(10000)
 
 except Exception as e:
     logger.error(f"Boot error: {str(e)}")
     status_led.set_color("red")
     time.sleep(10)
-    raise e
+    machine.reset()
 finally:
     status_led.off()
-    # machine.deepsleep(20000)
