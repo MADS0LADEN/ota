@@ -49,13 +49,14 @@ try:
 
     # Indiker succes med grønt lys
     status_led.set_color("green")
-    logger.debug("Boot sequence completed successfully")
+    logger.debug("Boot sequence completed successfully, now deepsleep")
+    machine.deepsleep(10000)
 
 except Exception as e:
     logger.error(f"Boot error: {str(e)}")
     status_led.set_color("red")
     time.sleep(10)
+    machine.reset()
     raise e
 finally:
     status_led.off()
-    # machine.deepsleep(20000)
