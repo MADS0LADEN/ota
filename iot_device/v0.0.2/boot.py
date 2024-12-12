@@ -54,7 +54,8 @@ try:
 except Exception as e:
     logger.error(f"Boot error: {str(e)}")
     status_led.set_color("red")
+    time.sleep(10)
     raise e
 finally:
     status_led.off()
-    machine.deepsleep(20000)
+    # machine.deepsleep(20000)
