@@ -24,7 +24,7 @@ def show_wake_reason():
     if wake_reason == machine.HARD_RESET:
         status_led.set_rgb(255, 0, 0)  # Rød for hard reset
     elif wake_reason == machine.DEEPSLEEP_RESET:
-        status_led.set_rgb(255, 0, 255)  # Blå for deep sleep wake
+        status_led.set_rgb(0, 0, 255)  # Blå for deep sleep wake
     else:
         status_led.set_color("white")
 
@@ -36,11 +36,6 @@ try:
     # Vis boot årsag
     show_wake_reason()
     time.sleep(1)
-
-    # Indiker start med blåt lys
-    status_led.set_color("blue")
-    logger.debug("Set LED to blue")
-    time.sleep(5)
     status_led.off()
 
     logger.debug("Importing main and ota")
