@@ -43,7 +43,7 @@ try:
 
     status_led.set_color("green")
     logger.debug("Boot sequence completed successfully, now deepsleep")
-    machine.deepsleep(3600000)
+    machine.deepsleep(10000)
 
 except Exception as e:
     logger.error(f"Boot error: {str(e)}")

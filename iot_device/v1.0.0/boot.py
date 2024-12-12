@@ -24,9 +24,9 @@ def show_wake_reason():
     if wake_reason == machine.HARD_RESET:
         status_led.set_rgb(255, 0, 0)  # Rød for hard reset
     elif wake_reason == machine.DEEPSLEEP_RESET:
-        status_led.set_rgb(255, 0, 255)  # Blå for deep sleep wake
+        status_led.set_rgb(0, 0, 255)  # Blå for deep sleep wake
     else:
-        status_led.set_color("white")
+        status_led.set_color("pink")
 
 
 try:
@@ -43,7 +43,7 @@ try:
 
     status_led.set_color("green")
     logger.debug("Boot sequence completed successfully, now deepsleep")
-    machine.deepsleep(10000)
+    machine.deepsleep(3600000)
 
 except Exception as e:
     logger.error(f"Boot error: {str(e)}")
